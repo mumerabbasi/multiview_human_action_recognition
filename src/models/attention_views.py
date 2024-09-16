@@ -2,7 +2,7 @@ import torch.nn as nn
 
 
 class MultiHeadAttentionOnViews(nn.Module):
-    def __init__(self, embed_dim, num_heads):
+    def __init__(self, embed_dim, num_heads=4):
         """
         Multi-head attention block for views.
 

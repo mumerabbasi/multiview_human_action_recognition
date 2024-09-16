@@ -12,11 +12,11 @@ class MultiviewActionDataset(Dataset):
 
     Args:
         data_dir (str): Path to the processed dataset directory
-        (e.g., 'data/processed').
+            (e.g., 'data/processed').
         transform (callable, optional): A function/transform that takes in an
-        image and returns a transformed version.
+            image and returns a transformed version.
         seq_len (int, optional): Fixed length for sequences. Default is None
-        (uses original length).
+            (uses original length).
     """
     def __init__(self, data_dir, transform=None, seq_len=None):
         self.data_dir = data_dir

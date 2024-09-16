@@ -10,13 +10,14 @@ def organize_actions(src_dir, target_dir, action_labels_csv, stride=24,
     action_labels.csv and building 8 action sequences (CSV has annotations
     for only one view) for each row.
 
-    Parameters:
-    - src_dir: The source directory containing the raw data.
-    - target_dir: The directory where organized action folders will be stored.
-    - action_labels_csv: Path to the CSV file containing action labels.
-    - stride: Number of frames to stride between consecutive subgroups.
-    - max_frame_diff: Maximum number of frames to consider in a subgroup.
-    - num_views: The number of views (camera angles) per action.
+    Args:
+        src_dir: The source directory containing the raw data.
+        target_dir: The directory where organized action folders will be
+            stored.
+        action_labels_csv: Path to the CSV file containing action labels.
+        stride: Number of frames to stride between consecutive subgroups.
+        max_frame_diff: Maximum number of frames to consider in a subgroup.
+        num_views: The number of views (camera angles) per action.
     '''
 
     # Read the CSV file containing action labels and frame information.

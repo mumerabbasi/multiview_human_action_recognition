@@ -23,6 +23,12 @@ class MultiviewActionDataset(Dataset):
         self.transform = transform
         self.seq_len = seq_len
         self.actions = sorted(os.listdir(data_dir))
+        self.num_classes = len(self.actions)
+
+        # Create a mapping from action labels (strings) to integers
+        self.action_to_idx = {action: idx for idx,
+                              action in enumerate(self.actions)}
+
         self.data = self._load_dataset()
 
     def _load_dataset(self):
@@ -59,7 +65,7 @@ class MultiviewActionDataset(Dataset):
         images_per_view = []
         for view_path in view_paths:
             frames = sorted(glob.glob(os.path.join(view_path, '*.jpg')))
-            if self.seq_len:
+            if self.seq_len and self.seq_len <= len(frames):
                 frames = frames[:self.seq_len]
             images = [Image.open(frame) for frame in frames]
             if self.transform:
@@ -86,7 +92,8 @@ class MultiviewActionDataset(Dataset):
         action, seq, view_paths = self.data[idx]
         views = self._load_images(view_paths)
 
-        return {
-            'action': action,
-            'views': views  # List of [seq_len, C, H, W] for each view
-        }
+        # Convert action string to the corresponding integer
+        action_idx = torch.tensor(self.action_to_idx[action])
+
+        # List of [seq_len, C, H, W] for each view
+        return views, action_idx

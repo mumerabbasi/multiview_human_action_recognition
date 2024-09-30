@@ -13,9 +13,9 @@ def get_train_transforms():
         training.
     """
     transform = T.Compose([
+        T.Resize(size=(224, 224)),
         T.RandomHorizontalFlip(p=0.5),
         T.RandomRotation(degrees=(-10, 10)),
-        T.RandomResizedCrop(size=(224, 224)),
         # Convert PIL image to Tensor with pixel values in range [0, 1]
         T.ToTensor(),
         # Normalize using ImageNet mean and std

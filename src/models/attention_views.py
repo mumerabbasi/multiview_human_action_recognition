@@ -11,7 +11,7 @@ class MultiHeadAttentionOnViews(nn.Module):
             num_heads (int): Number of attention heads.
         """
         super(MultiHeadAttentionOnViews, self).__init__()
-        
+
         # Multi-head attention layer from PyTorch
         self.multihead_attn = nn.MultiheadAttention(
             embed_dim=embed_dim, num_heads=num_heads,
@@ -37,7 +37,7 @@ class MultiHeadAttentionOnViews(nn.Module):
         # Change shape to [batch_size, seq_len, num_views, embed_dim] as we
         #   need to apply attention on the views dim
         x = x.permute(0, 2, 1, 3)
-        x = x.contiguous().view(batch_size * seq_len, num_views, embed_dim) 
+        x = x.contiguous().view(batch_size * seq_len, num_views, embed_dim)
 
         # Apply multi-head attention across the views
         # Shape: [batch_size * seq_len, num_views, embed_dim]

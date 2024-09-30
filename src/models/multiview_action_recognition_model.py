@@ -23,7 +23,9 @@ class MultiviewActionRecognitionModel(nn.Module):
         super(MultiviewActionRecognitionModel, self).__init__()
 
         # Feature extractor
-        self.spatial_feature_extractor = SpatialFeatureExtractor()
+        self.spatial_feature_extractor = SpatialFeatureExtractor(
+            pretrained_spatial_feature_extractor
+            )
 
         # Embedding dimension of the feature extractor
         self.embed_dim = self.spatial_feature_extractor.embed_dim
@@ -55,8 +57,6 @@ class MultiviewActionRecognitionModel(nn.Module):
         Returns:
             Tensor: Output logits of shape [batch_size, num_classes].
         """
-        batch_size, num_views, seq_len, C, H, W = x.size()
-
         # Extract spatial features for each frame
         # Shape: [batch_size, num_views, seq_len, embed_dim]
         features = self.spatial_feature_extractor(x)

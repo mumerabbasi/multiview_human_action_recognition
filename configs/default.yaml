@@ -1,0 +1,4 @@
+train_pct: 0.80
+val_pct: 0.10
+test_pct: 0.10
+num_classes: 5
